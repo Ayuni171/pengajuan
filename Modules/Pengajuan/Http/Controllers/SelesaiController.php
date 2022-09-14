@@ -6,6 +6,7 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
+use Modules\Pengajuan\Entities\PengajuanBiasa;
 use Modules\Pengajuan\Entities\Role;
 
 class SelesaiController extends Controller
@@ -16,10 +17,7 @@ class SelesaiController extends Controller
      */
     public function index()
     {
-        $role=Role::select()->where('user_id',Auth::user()->id)->get()->first();
-        return view('pengajuan::rekape.selesai', [
-            'role'=>$role->role_id,
-        ]);
+        return view('pengajuan::index');
     }
 
     /**
@@ -48,8 +46,28 @@ class SelesaiController extends Controller
      */
     public function show($id)
     {
-        return view('pengajuan::show');
-    }
+        $role = Role::select()->where('user_id', Auth::user()->id)->get()->first();
+       
+        // return $historis;
+
+
+        if($role->divisi_id==1 && $role->jabatan_id==1) { 
+            
+            return view('pengajuan::PengajuanBiasa.pengajuan_selesai.index', [
+            'role' => $role->role_id,
+            'pengajuanbiasas'=> PengajuanBiasa::select()->where('divisi',1)->get(),
+         
+            ]); }
+        
+        if($role->divisi_id==3 && $role->jabatan_id==7  ) {
+                return view('pengajuan::PengajuanBiasa.pengajuan_selesai.index', [
+                'role' => $role->role_id,
+                'pengajuanbiasas' => PengajuanBiasa::select()->where('divisi',3)->get(),
+                
+                ]); 
+
+       
+    }}
 
     /**
      * Show the form for editing the specified resource.

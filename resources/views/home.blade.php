@@ -129,7 +129,7 @@
             class="card-img-top"
             alt="knowledge-base-image"
           />
-          <div class="card-body text-center">
+          <div class="card-body text-center" href='/pengajuan'>
             <h4>Pengaturan Pengajuan</h4>
             <p class="text-body mt-1 mb-0">Atur Alur Pengajuan</p>
           </div>

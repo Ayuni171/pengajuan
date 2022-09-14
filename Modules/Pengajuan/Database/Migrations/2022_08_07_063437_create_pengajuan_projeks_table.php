@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string('tanggal')->nullable();
             $table->string('divisi');
             $table->text('catatan');
-            $table->string('tambahlampiran')->nullable();
             $table->timestamps();
         });
     }

@@ -9,10 +9,10 @@ class LampiranPengajuanBiasa extends Model
 {
     use HasFactory;
 
-    protected $fillable = [];
+    protected $guarded = ['id'];
     
-    protected static function newFactory()
+    public function lampiran()
     {
-        return \Modules\Pengajuan\Database\factories\LampiranPengajuanBiasaFactory::new();
+        return $this->hasmany(PengajuanBiasa::class);
     }
 }

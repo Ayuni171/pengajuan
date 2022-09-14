@@ -9,10 +9,20 @@ class Role extends Model
 {
     use HasFactory;
 
-    protected $fillable = [];
-    
-    protected static function newFactory()
+    protected $guarded = ['id'];
+    public function role()
     {
-        return \Modules\Pengajuan\Database\factories\RoleFactory::new();
+        return $this->belongsTo(PengajuanBiasa::class);
     }
+    
+    public function divisi()
+    {
+        return $this->belongsTo(Divisi::class);
+    }
+    
+    public function jabatanrole()
+    {
+        return $this->hasMany(KeteranganJabatan::class);
+    }
+  
 }

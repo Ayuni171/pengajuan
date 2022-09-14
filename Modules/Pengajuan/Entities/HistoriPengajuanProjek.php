@@ -9,10 +9,10 @@ class HistoriPengajuanProjek extends Model
 {
     use HasFactory;
 
-    protected $fillable = [];
+    protected $guarded = ['id'];
     
-    protected static function newFactory()
+    public function histori()
     {
-        return \Modules\Pengajuan\Database\factories\HistoriPengajuanProjekFactory::new();
+        return $this->hasMany(KeteranganJabatan::class);
     }
 }

@@ -28,7 +28,10 @@ class RevisiController extends Controller
      */
     public function create()
     {
-        return view('pengajuan::create');
+        $role = Role::select()->where('user_id', Auth::user()->id)->get()->first();
+        return view('pengajuan::PengajuanBiasa.revisi_pengajuan.index', [
+            'role' => $role->role_id,
+        ]);
     }
 
     /**

@@ -11,9 +11,13 @@ class PengajuanProjek extends Model
 
     protected $guarded = ['id'];
 
-
-    protected static function newFactory()
+    public function user()
     {
-        // return \Modules\Pengajuan\Database\factories\PengajuanProjekFactory::new();
+        return $this->belongsTo(User::class,'user_id', 'id');
+    }
+
+    public function lampiran()
+    {
+        return $this->belongsTo(LampiranPengajuanProjek::class,'lampiran_pengajuan_projek_id', 'pengajuan_projek_id');
     }
 }

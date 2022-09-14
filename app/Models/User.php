@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Modules\Pengajuan\Entities\KeteranganJabatan;
+use Modules\Pengajuan\Entities\PengajuanBiasa;
 
 class User extends Authenticatable
 {
@@ -22,6 +24,19 @@ class User extends Authenticatable
         'email',
         'password',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(PengajuanBiasa::class);
+      
+    }
+    public function jabatanuser()
+    {
+        return $this->hasMany(KeteranganJabatan::class);
+      
+    }
+
+    
 
     /**
      * The attributes that should be hidden for serialization.

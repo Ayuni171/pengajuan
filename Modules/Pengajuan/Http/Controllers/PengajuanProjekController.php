@@ -6,8 +6,10 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
+use Modules\Pengajuan\Entities\HistoriPengajuanProjek;
 use Modules\Pengajuan\Entities\Role;
 use Modules\Pengajuan\Entities\PengajuanProjek;
+
 
 class PengajuanProjekController extends Controller
 {
@@ -18,7 +20,7 @@ class PengajuanProjekController extends Controller
     public function index()
     {
         $role = Role::select()->where('user_id', Auth::user()->id)->get()->first();
-        return view('pengajuan::formp.pengajuanProjek', [
+        return view('pengajuan::PengajuanProjek.buat_pengajuan.index', [
             'role' => $role->role_id,
             'pengajuanprojeks' => PengajuanProjek::all(),
         ]);
@@ -30,7 +32,12 @@ class PengajuanProjekController extends Controller
      */
     public function create()
     {
-        return view('pengajuan::create');
+        $role = Role::select()->where('user_id', Auth::user()->id)->get()->first();
+        return view('pengajuan::PengajuanProjek.lihat_pengajuan.index', [
+            'role' => $role->role_id,
+            'pengajuanprojeks' => PengajuanProjek::all(),
+
+        ]);
     }
 
     /**
@@ -40,6 +47,10 @@ class PengajuanProjekController extends Controller
      */
     public function store(Request $request)
     {
+
+        $hitung = PengajuanProjek::select()->get()->count();
+        $id = $hitung + 1;
+
         PengajuanProjek::create([
 
             'keterangan' => $request->keterangan,
@@ -48,19 +59,20 @@ class PengajuanProjekController extends Controller
             'tanggal' => $request->tanggal,
             'divisi' => $request->divisi,
             'catatan' => $request->catatan,
-            'tambahlampiran' => $request->file('tambahlampiran')->store('lampiran'),
+            'user_id'=>auth::user()->id,
+
 
         ]);
 
-        $role = Role::select()->where('user_id', Auth::user()->id)->get()->first();
-        return view(
-            'pengajuan::rekape.lihatPengajuanBiasa',
-            [
+        HistoriPengajuanProjek::create([
+            'pengajuan_projek_id' => $id,
+            'user_id' => auth::user()->id,
+            'status' => 5,
+            'catatan' => $request->catatan,
+        ]);
 
-                'role' => $role->role_id,
-                'pengajuanprojeks' => PengajuanProjek::all(),
-            ]
-        );
+        return redirect('/pengajuan/pengajuanProjek/lihat_pengajuan/index');
+        
     }
 
     /**

@@ -9,10 +9,18 @@ class HistoriPengajuanBiasa extends Model
 {
     use HasFactory;
 
-    protected $fillable = [];
-    
-    protected static function newFactory()
+    protected $guarded = ['id'];
+
+    public function histori()
     {
-        return \Modules\Pengajuan\Database\factories\HistoriPengajuanBiasaFactory::new();
+        return $this->hasmany(PengajuanBiasa::class);
     }
+
+    public function history()
+    {
+        return $this->hasMany(KeteranganJabatan::class);
+    }
+    
+    
+  
 }

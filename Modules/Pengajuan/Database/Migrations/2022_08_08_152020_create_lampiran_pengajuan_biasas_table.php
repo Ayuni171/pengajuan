@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('lampiran_pengajuan_biasas', function (Blueprint $table) {
             $table->id();
-            $table->string('pengajuan_dinas_id');
-            $table->string('keterangan');
+            $table->string('pengajuan_biasa_id');
+            $table->string('note_lampiran');
             $table->string('lampiran');
             $table->timestamps();
         });

@@ -15,13 +15,13 @@ return new class extends Migration
     {
         Schema::create('pengajuan_biasas', function (Blueprint $table) {
             $table->id();
-            $table->string('kategoripengajuan');
+            $table->string('user_id');
+            $table->string('kategori');
             $table->string('keterangan');
             $table->string('jumlah');
             $table->string('tanggal')->nullable();
             $table->string('divisi');
             $table->text('catatan');
-            $table->string('tambahlampiran')->nullable();
             $table->timestamps();
         });
     }

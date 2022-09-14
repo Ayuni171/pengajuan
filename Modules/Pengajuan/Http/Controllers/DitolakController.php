@@ -6,6 +6,8 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
+use Modules\Pengajuan\Entities\HistoriPengajuanBiasa;
+use Modules\Pengajuan\Entities\PengajuanBiasa;
 use Modules\Pengajuan\Entities\Role;
 
 
@@ -18,9 +20,12 @@ class DitolakController extends Controller
     public function index()
     {
         $role=Role::select()->where('user_id',Auth::user()->id)->get()->first();
-        return view('pengajuan::rekape.ditolak', [
-            'role'=>$role->role_id,
-        ]);
+        $historipengajuanbiasa=HistoriPengajuanBiasa::select()->where('status',3)->get()->first();
+             return view('pengajuan::PengajuanBiasa.pengajuan_ditolak.index', [
+                    'role' => $role->role_id,
+                    'pengajuanbiasas' => PengajuanBiasa::select()->where('id',$historipengajuanbiasa->pengajuan_biasa_id)->get(),
+                 
+                ]); 
     }
 
     /**
