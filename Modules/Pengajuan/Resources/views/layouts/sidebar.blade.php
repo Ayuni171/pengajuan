@@ -121,7 +121,7 @@
                             data-i18n="buatpengajuan">Buat
                             Pengajuan</span></a>
                     <ul class="menu-content">
-                        <li><a class="d-flex align-items-center" href="/pengajuan/pengajuanBiasa"><i
+                        <li><a class="d-flex align-items-center" href="/pengajuan/pengajuanBiasa/create"><i
                                     data-feather="circle"></i><span class="menu-item text-truncate"
                                     data-i18n="pengajuanbiasa">Pengajuan Biasa</span></a>
                         </li>
